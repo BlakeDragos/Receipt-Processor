@@ -9,6 +9,9 @@ const receipts = {};
 app.post('/receipts/process', (req, res) => {
 	try {
 		const receipt = req.body;
+		if (!receipt || Object.keys(receipt).length === 0) {
+			return res.status(400).json({ error: 'Empty body' });
+		  }
 		validateReceipt(receipt);
 
 		const id = uuidv4();
